@@ -1,0 +1,7 @@
+{
+  "antlr4.generation.mode": "external",
+  "antlr4.generation.language": "CSharp",
+  "antlr4.generation.listeners": false,
+  "antlr4.generation.visitors": true,
+  "antlr4.generation.outputDir": "$/AntlrFib"
+}
