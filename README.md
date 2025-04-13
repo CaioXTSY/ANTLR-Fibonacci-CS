@@ -9,6 +9,28 @@ O projeto utiliza [ANTLR4](https://www.antlr.org/) para criar um analisador (lex
 - Noemy Torres Pereira
 - Gustavo Henrique dos Santos Malaquias
 
+## Gramática ANTLR4
+
+```antlr
+grammar Fibonacci;
+
+options {
+    language = CSharp;
+}
+
+// Regra inicial – a expressão seguida do fim da entrada
+prog: expr EOF ;
+
+// Regra para reconhecer "fib(n)", onde n é um número
+expr: 'fib' '(' NUMBER ')' ;
+
+// Token para números inteiros
+NUMBER: [0-9]+ ;
+
+// Ignora espaços, quebras de linha e tabulações
+WS: [ \t\r\n]+ -> skip ;
+```
+
 ## Estrutura do Projeto
 
 ```
@@ -40,7 +62,7 @@ ANTLR-Fibonacci-CS/
 └── ANTLR-Fibonacci-Sln.sln     # Solução para Visual Studio
 ```
 
-### Observações Importantes
+### Observações
 
 1. **Pasta Grammar**:  
    - Aqui fica o arquivo `Fibonacci.g4`, que define a gramática do ANTLR para reconhecer `fib(n)`.  
@@ -57,8 +79,21 @@ ANTLR-Fibonacci-CS/
    - Arquivo de projeto que define as configurações de build, incluindo a versão do .NET (9.0) e as dependências (por exemplo, o pacote `Antlr4.Runtime.Standard`).
 
 5. **.vscode/settings.json**:  
-   - Configurações específicas do VSCode para que a extensão ANTLR4 gere o código C# ao salvar a gramática.  
-   - Exemplos de configurações: `"mode": "external"`, `"language": "CSharp"`, `"visitors": true`, etc.
+    - Configurações específicas do VSCode para que a extensão ANTLR4 gere o código C# ao salvar a gramática:
+      ```json
+      {
+            "antlr4.generation": {
+                 "mode": "external",
+                 "language": "CSharp",
+                 "listeners": false,
+                 "visitors": true
+            },
+            "antlr4.generation.autoGenerate": true
+      }
+      ```
+    - `mode: "external"`: Gera arquivos fora da pasta .antlr
+    - `visitors: true`: Habilita geração de visitors
+    - `autoGenerate: true`: Gera código automaticamente ao salvar
 
 6. **.antlr**:  
    - Pasta em que a extensão ANTLR do VSCode normalmente salva arquivos auxiliares, como `.tokens`, `.interp`, entre outros, usados para análise e visualização da gramática.
