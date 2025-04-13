@@ -1,0 +1,10 @@
+# Ignora binários e compilados
+bin/
+obj/
+
+# Ignora a pasta .antlr criada pela extensão
+.antlr/
+
+# Ignora arquivos intermediários do ANTLR
+*.tokens
+*.interp
