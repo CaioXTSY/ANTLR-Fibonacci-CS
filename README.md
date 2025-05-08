@@ -138,3 +138,33 @@ ANTLR-Fibonacci-CS/
    Por padrão, o projeto executa `Program.cs`, que calcula `fib(10)` e exibe o resultado.
 
 ---
+
+## Principais etapas em [Program.cs](http://_vscodecontentref_/10)
+```csharp
+var input = args.Length > 0 ? args[0] : "fib(10)";
+var inputStream = new AntlrInputStream(input);
+var lexer       = new FibonacciLexer(inputStream);
+var tokens      = new CommonTokenStream(lexer);
+tokens.Fill();
+
+// 1) Exibe tokens
+Console.WriteLine("Tokens:");
+foreach (var tk in tokens.GetTokens())
+    Console.WriteLine($"  '{{ {tk.Text} }}' -> {tk.Type}");
+
+// 2) Análise sintática
+var parser = new FibonacciParser(tokens);
+IParseTree tree = parser.prog();
+
+// 3) Impressão da árvore
+Console.WriteLine("ToStringTree:");
+Console.WriteLine(tree.ToStringTree(parser));
+
+// 4) Árvore “desenhada”
+PrintTree(tree, parser);
+
+// 5) Cálculo via visitor
+var visitor = new FibonacciVisitor();
+int result = visitor.Visit(tree);
+Console.WriteLine($"Resultado: {result}");
+```
