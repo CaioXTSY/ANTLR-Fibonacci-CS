@@ -9,6 +9,28 @@ O projeto utiliza [ANTLR4](https://www.antlr.org/) para criar um analisador (lex
 - Noemy Torres Pereira
 - Gustavo Henrique dos Santos Malaquias
 
+---
+
+## Funcionamento do Projeto
+
+1. **Gramática (Fibonacci.g4)**  
+   - Define duas regras principais: `prog` (que termina em EOF) e `expr` (reconhecendo `fib(n)`).  
+   - Cria tokens: `NUMBER` (para inteiros), e `WS` (para espaços e quebras de linha).  
+
+2. **Lexer e Parser**  
+   - O lexer (FibonacciLexer.cs) converte a string de entrada em tokens.  
+   - O parser (FibonacciParser.cs) cria a árvore de sintaxe (parse tree) usando as regras definidas na gramática.
+
+3. **Visitor para Cálculo de Fibonacci**  
+   - A classe `FibonacciVisitor` (seja em `Generated/` ou em outro local) herda de `FibonacciBaseVisitor<int>` e sobrescreve os métodos de visita às regras (por exemplo, `VisitExpr`).  
+   - Quando encontra `fib(n)`, converte `n` para inteiro e faz o cálculo usando um método `Fib(n)`, retornando o resultado.
+
+4. **Program.cs**  
+   - Pega a string de entrada, instancia `FibonacciLexer` e `FibonacciParser`, e chama `parser.prog()`.  
+   - Em seguida, cria o `FibonacciVisitor` e executa `visitor.Visit(tree)`.  
+   - Exibe no console o resultado de `fib(n)`.
+---
+
 ## Gramática ANTLR4
 
 ```antlr
@@ -102,26 +124,6 @@ ANTLR-Fibonacci-CS/
    - Pastas padrão de compilação do .NET, onde ficam os artefatos de build (executáveis, assemblies, etc.).  
    - Geralmente são ignoradas no controle de versão via `.gitignore`.
 
----
-
-## Funcionamento do Projeto
-
-1. **Gramática (Fibonacci.g4)**  
-   - Define duas regras principais: `prog` (que termina em EOF) e `expr` (reconhecendo `fib(n)`).  
-   - Cria tokens: `NUMBER` (para inteiros), e `WS` (para espaços e quebras de linha).  
-
-2. **Lexer e Parser**  
-   - O lexer (FibonacciLexer.cs) converte a string de entrada em tokens.  
-   - O parser (FibonacciParser.cs) cria a árvore de sintaxe (parse tree) usando as regras definidas na gramática.
-
-3. **Visitor para Cálculo de Fibonacci**  
-   - A classe `FibonacciVisitor` (seja em `Generated/` ou em outro local) herda de `FibonacciBaseVisitor<int>` e sobrescreve os métodos de visita às regras (por exemplo, `VisitExpr`).  
-   - Quando encontra `fib(n)`, converte `n` para inteiro e faz o cálculo usando um método `Fib(n)`, retornando o resultado.
-
-4. **Program.cs**  
-   - Pega a string de entrada, instancia `FibonacciLexer` e `FibonacciParser`, e chama `parser.prog()`.  
-   - Em seguida, cria o `FibonacciVisitor` e executa `visitor.Visit(tree)`.  
-   - Exibe no console o resultado de `fib(n)`.
 
 ---
 
