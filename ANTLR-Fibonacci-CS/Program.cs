@@ -34,20 +34,30 @@ class Program
         Console.WriteLine($"Resultado: {result}");
     }
 
-    static void PrintTree(IParseTree tree, Parser parser, string indent = "")
+    static void PrintTree(IParseTree tree, Parser parser, string prefix = "", bool isLast = true)
     {
-        if (tree is ParserRuleContext prContext)
+        // marcador de nó
+        var marker = isLast ? "└─ " : "├─ ";
+
+        if (tree is ParserRuleContext pr)
         {
-            // nome da regra
-            Console.WriteLine(indent + parser.RuleNames[prContext.RuleIndex]);
-            for (int i = 0; i < prContext.ChildCount; i++)
-                PrintTree(prContext.GetChild(i), parser, indent + "  ");
+            // imprime o nome da regra
+            Console.WriteLine(prefix + marker + parser.RuleNames[pr.RuleIndex]);
+
+            // ajusta o prefixo para os filhos
+            prefix += isLast ? "   " : "│  ";
+
+            for (int i = 0; i < pr.ChildCount; i++)
+            {
+                bool lastChild = (i == pr.ChildCount - 1);
+                PrintTree(pr.GetChild(i), parser, prefix, lastChild);
+            }
         }
-        else if (tree is ITerminalNode terminal)
+        else if (tree is ITerminalNode term)
         {
-            var text = terminal.Symbol.Text;
+            var text = term.Symbol.Text;
             if (!string.IsNullOrWhiteSpace(text) && text != "<EOF>")
-                Console.WriteLine(indent + text);
+                Console.WriteLine(prefix + marker + text);
         }
     }
 }
