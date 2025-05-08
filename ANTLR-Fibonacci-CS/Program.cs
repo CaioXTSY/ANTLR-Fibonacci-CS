@@ -23,8 +23,12 @@ class Program
         IParseTree tree = parser.prog();
 
         // Substitua a impressão simples por:
-        // Console.WriteLine(tree.ToStringTree(parser));
+        Console.WriteLine("==========================");
+        Console.WriteLine("Árvore de Análise:");
+        Console.WriteLine(tree.ToStringTree(parser));
+        Console.WriteLine("==========================");
         PrintTree(tree, parser);
+        Console.WriteLine("==========================");
 
         // Cria o visitor personalizado para percorrer a árvore e calcular Fibonacci
         FibonacciVisitor visitor = new FibonacciVisitor();
