@@ -67,10 +67,10 @@ class Program
         else if (tree is ITerminalNode term)
         {
             var text = term.Symbol.Text;
-            // para incluir também o "<EOF>" na árvore desenhada,
-            // comente ou remova a condição abaixo
             if (!string.IsNullOrWhiteSpace(text) && text != "<EOF>")
                 Console.WriteLine(prefix + marker + text);
         }
+
+        
     }
 }
