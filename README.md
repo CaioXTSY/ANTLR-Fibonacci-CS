@@ -217,7 +217,55 @@ Console.WriteLine(tree.ToStringTree(parser));
 // Exibe uma representação visual da árvore
 PrintTree(tree, parser);
 ```
+## Implementação do Visitor
 
+Após a geração da árvore de análise sintática, precisamos de um mecanismo para percorrê-la e extrair informações ou executar ações com base em sua estrutura. É aqui que entra o padrão de design Visitor, implementado na classe `FibonacciVisitor`.
+
+O padrão Visitor permite separar os algoritmos das estruturas de dados sobre as quais eles operam. No contexto de compiladores e interpretadores, isso significa separar a lógica de processamento da estrutura da árvore sintática.
+
+Nossa implementação do Visitor para cálculo de Fibonacci é a seguinte:
+
+```csharp
+public class FibonacciVisitor : FibonacciBaseVisitor<int>
+{
+   // Visita a regra 'prog' e chama a visita à regra 'expr'
+   public override int VisitProg(FibonacciParser.ProgContext context)
+   {
+      return Visit(context.expr());
+   }
+
+   // Visita a regra 'expr' e extrai o número para calcular o Fibonacci
+   public override int VisitExpr(FibonacciParser.ExprContext context)
+   {
+      int n = int.Parse(context.NUMBER().GetText());
+      return Fib(n);
+   }
+
+   // Função recursiva para calcular o Fibonacci (forma ingênua)
+   private int Fib(int n)
+   {
+      if(n < 2)
+         return n;
+      return Fib(n - 1) + Fib(n - 2);
+   }
+}
+```
+
+Cada método `Visit` corresponde a uma regra na gramática:
+
+- **VisitProg**: Responsável por processar a regra raiz da gramática. Simplesmente delega o processamento para a expressão filha, refletindo a estrutura da regra `prog: expr EOF`.
+
+- **VisitExpr**: Este é o método principal que processa a expressão Fibonacci. Ele extrai o valor numérico do token `NUMBER` da árvore, e chama a função `Fib()` para calcular o resultado.
+
+- **Fib**: Um método auxiliar que implementa o algoritmo recursivo clássico de Fibonacci. Para cada número n, ele retorna a soma dos dois números de Fibonacci anteriores.
+
+O Visitor é invocado no `Program.cs` após a construção da árvore sintática:
+
+```csharp
+var visitor = new FibonacciVisitor();
+int result = visitor.Visit(tree);
+Console.WriteLine($"Resultado: {result}");
+```
 ## Estrutura do Projeto
 
 ```
