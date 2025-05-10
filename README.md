@@ -279,18 +279,14 @@ ANTLR-Fibonacci-CS/
 ├── .antlr/                     # Pasta onde a extensão salva arquivos auxiliares (.tokens, .interp)
 │
 ├── Grammar/                    # Pasta contendo a(s) gramática(s) do ANTLR
-│   ├── Fibonacci.g4            # Gramática definindo "fib(n)" e tokens (NUMBER, WS, etc.)
-│   ├── FibonacciBaseVisitor.cs # (Opcional) Pode ser gerado se a extensão estiver configurada
-│   ├── FibonacciParser.cs      # Arquivo gerado (parser)
-│   ├── FibonacciLexer.cs       # Arquivo gerado (lexer)
-│   └── Fibonacci.tokens        # Tokens do ANTLR
+│   └── Fibonacci.g4            # Gramática definindo "fib(n)" e tokens (NUMBER, WS, etc.)
 │
 ├── Generated/                  # Pasta onde podem ser movidos os arquivos gerados pelo ANTLR
-│   ├── FibonacciLexer.cs
-│   ├── FibonacciParser.cs
-│   ├── FibonacciBaseVisitor.cs
-│   ├── FibonacciVisitors.cs
-│   └── ...
+│   ├── FibonacciLexer.cs       # Arquivo gerado (lexer) 
+│   ├── FibonacciParser.cs      # Arquivo gerado (parser)
+│   ├── FibonacciBaseVisitor.cs # (Opcional) Pode ser gerado se a extensão estiver configurada
+│   ├── FibonacciVisitors.cs    # Implementação do padrão Visitor para cálculo de Fibonacci
+│   └── FibonacciVisitor.cs     # Contém a lógica para percorrer a árvore
 │
 ├── bin/                        # Binários gerados (pasta de build)
 ├── obj/                        # Arquivos temporários do build
