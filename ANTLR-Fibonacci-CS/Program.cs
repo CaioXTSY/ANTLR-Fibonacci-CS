@@ -67,6 +67,7 @@ class Program
         else if (tree is ITerminalNode term)
         {
             var text = term.Symbol.Text;
+
             if (!string.IsNullOrWhiteSpace(text) && text != "<EOF>")
                 Console.WriteLine(prefix + marker + text);
         }
