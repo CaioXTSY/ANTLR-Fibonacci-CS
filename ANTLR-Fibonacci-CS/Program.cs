@@ -49,29 +49,4 @@ class Program
         // Exibe o resultado
         Console.WriteLine($"Resultado: {result}");
     }
-
-    static void PrintTree(IParseTree tree, Parser parser, string prefix = "", bool isLast = true)
-    {
-        var marker = isLast ? "└─ " : "├─ ";
-
-        if (tree is ParserRuleContext pr)
-        {
-            Console.WriteLine(prefix + marker + parser.RuleNames[pr.RuleIndex]);
-            prefix += isLast ? "   " : "│  ";
-            for (int i = 0; i < pr.ChildCount; i++)
-            {
-                bool last = i == pr.ChildCount - 1;
-                PrintTree(pr.GetChild(i), parser, prefix, last);
-            }
-        }
-        else if (tree is ITerminalNode term)
-        {
-            var text = term.Symbol.Text;
-
-            if (!string.IsNullOrWhiteSpace(text) && text != "<EOF>")
-                Console.WriteLine(prefix + marker + text);
-        }
-
-        
-    }
 }
