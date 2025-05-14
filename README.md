@@ -349,15 +349,6 @@ Tokens:
 ToStringTree:
 (prog (expr fib ( 10 )) <EOF>)
 
-Árvore:
-prog
-  └── expr
-       ├── fib
-       ├── (
-       ├── 10
-       └── )
-  └── <EOF>
-
 Resultado: 55
 ```
 
