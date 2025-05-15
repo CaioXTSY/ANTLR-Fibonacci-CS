@@ -38,9 +38,6 @@ class Program
         Console.WriteLine(tree.ToStringTree(parser));
         Console.WriteLine("==========================");
 
-        // Imprime a árvore “desenhada”
-        PrintTree(tree, parser);
-        Console.WriteLine("==========================");
 
         // Visitor que calcula Fibonacci
         var visitor = new FibonacciVisitor();
