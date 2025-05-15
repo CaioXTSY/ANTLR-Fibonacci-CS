@@ -4,7 +4,9 @@ Este é um projeto desenvolvido como parte da disciplina de Compiladores, minist
 
 O projeto utiliza [ANTLR4](https://www.antlr.org/) para criar um analisador (lexer + parser) que reconhece e processa expressões do tipo `fib(n)` em C#, incluindo um visitor para calcular o número de Fibonacci correspondente.
 
-## Sumário
+### Materiais do Projeto
+- [Apresentação sobre Análise Léxica](https://www.canva.com/design/DAGnRqBGZY0/1QIfyOqZdMtd9r2RyUfpAg/edit?utm_content=DAGnRqBGZY0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+- [Apresentação sobre Análise Sintática](https://www.canva.com/design/DAGnWmyVc9U/-bvWtgt6zkgjy4VdoOeeNw/edit?utm_content=DAGnWmyVc9U&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Sumário
 
